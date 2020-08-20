@@ -1,16 +1,67 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import VideoPlayer from 'react-native-video';
 
 const VideoPlayerScreen = () => {
+  const videoPlayerRef = createRef();
+
+  const onBuffer = () => {};
+
+  const onLoad = (payload) => {
+    // dispatch here to update store with data if it doesn't already exist
+    // payload.duration
+  };
+
+  const onProgress = () => {
+
+  };
+
+  const onError = (...args) => {
+    console.log('error', ...args);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>VideoPlayerScreen</Text>
+      <View style={styles.videoPlayerContainer}>
+        <VideoPlayer
+          allowsExternalPlayback
+          controls
+          source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+          ref={videoPlayerRef}
+          onError={onError}
+          onBuffer={onBuffer}
+          onLoad={onLoad}
+          onProgress={onProgress}
+          style={styles.videoPlayer}
+        />
+      </View>
+
+      <View style={styles.videoDetailsContainer}>
+        <Text>EXAMPLE</Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
+  videoPlayerContainer: {
+    flex: 1,
+  },
+  videoPlayer: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: 'black',
+  },
+  videoDetailsContainer: {
+    flex: 1,
+  },
 });
 
 export default VideoPlayerScreen;
