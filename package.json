@@ -23,7 +23,8 @@
     "react-native-safe-area-context": "^3.1.6",
     "react-native-screens": "^2.10.1",
     "react-native-vector-icons": "^7.0.0",
-    "react-native-video": "https://github.com/react-native-community/react-native-video#master"
+    "react-native-video": "https://github.com/react-native-community/react-native-video#master",
+    "redux-zero": "^5.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
