@@ -6,16 +6,20 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
+import { Provider } from 'redux-zero/react';
 
 import RootNavigator from './RootNavigator';
+import store from './store';
 
 const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <RootNavigator />
+      <Provider store={store}>
+        <RootNavigator />
+      </Provider>
     </>
   );
 };

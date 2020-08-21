@@ -6,6 +6,7 @@ const colors = {
   primary: '#3f4953',
   secondary: '#5d666e',
   white: '#fff',
+  gray: '#bcc2c9',
   black: '#000',
 };
 
