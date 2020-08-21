@@ -1,6 +1,7 @@
 import React, { createRef } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import VideoPlayer from 'react-native-video';
+import { CastButton } from 'react-native-google-cast';
 
 const VideoPlayerScreen = () => {
   const videoPlayerRef = createRef();
@@ -33,7 +34,13 @@ const VideoPlayerScreen = () => {
           onLoad={onLoad}
           onProgress={onProgress}
           style={styles.videoPlayer}
-        />
+        >
+          <View style={styles.videoContentContainer}>
+            <Text>FS</Text>
+            
+            <CastButton />
+          </View>
+        </VideoPlayer>
       </View>
 
       <View style={styles.videoDetailsContainer}>
@@ -58,6 +65,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     backgroundColor: 'black',
+  },
+  videoContentContainer: {
+    flex: 1,
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   videoDetailsContainer: {
     flex: 1,
