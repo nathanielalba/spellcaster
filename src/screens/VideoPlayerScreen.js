@@ -27,12 +27,15 @@ const VideoPlayerScreen = () => {
   // we need to track if it's full screen or not to optionally hide the navbar
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isShowingControls, setIsShowingControls] = useState(false);
-  const [castState, device] = useCasting();
+  const [isCasting, castingDevice] = useCasting();
   const videoPlayerRef = createRef();
   const navigation = useNavigation();
   const controlsRef = useRef();
 
   useEffect(() => {
+    // keep custom controls in sync with video player
+    handleShowingControls();
+
     // ensure that the status bar is set to visible
     return () => {
       StatusBar.setHidden(false);
@@ -51,8 +54,21 @@ const VideoPlayerScreen = () => {
     StatusBar.setHidden(isFullScreen);
   }, [isFullScreen]);
 
+  useEffect(() => {
+    if (isCasting) {
+      GoogleCast.castMedia({
+        mediaUrl: 'https://vjs.zencdn.net/v/oceans.mp4',
+        imageUrl: 'https://vignette.wikia.nocookie.net/thehobbitfilm/images/2/27/GandalfTheHobbitFilmseries.jpg/revision/latest?cb=20161228222115',
+        title: 'Gandalf the Grey',
+      });
+    } else {
+      GoogleCast.endSession();
+    }
+  }, [isCasting]);
+
   // keep track of the icon name based on is full screen or not
   const iconName = useMemo(() => isFullScreen ? 'fullscreen-exit' : 'fullscreen' ,[isFullScreen]);
+  const startResponder = useMemo(() => isCasting ? () => null : handleShowingControls, [isCasting]);
 
   const onBuffer = () => {};
 
@@ -98,43 +114,63 @@ const VideoPlayerScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.videoPlayerContainer}>
-          <View style={styles.videoPlayer} onStartShouldSetResponder={handleShowingControls}>
+          <View
+            style={styles.videoPlayer}
+            onStartShouldSetResponder={startResponder}
+          >
             {
-              isShowingControls && (
-                <View style={{position: 'absolute', top: 0, right: 0, left: 0, flex: 1, flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 10, zIndex: 1}}>
-                  <IconButton
-                    name={iconName}
-                    size={32}              
-                    onPress={toggleFullScreen}
-                  />
-    
-                  <CastButton style={{ height: 24, width: 24, backgroundColor: 'white' }} />
-                </View>
-              )
-            }
+              isCasting
+                ? (
+                  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    {
+                      castingDevice && (
+                        <Text style={{color: 'white', fontSize: 28, textAlign: 'center'}}>Currently casting to: {castingDevice.name}</Text>
+                      )
+                    }
+                  </View>
+                )
+                : (
+                  <>
+                    {
+                      isShowingControls && (
+                        <View style={{position: 'absolute', top: 0, right: 0, left: 0, flex: 1, flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 10, zIndex: 1, alignItems: 'center', justifyContent: 'space-between'}}>
+                          <IconButton
+                            name={iconName}
+                            size={32}              
+                            onPress={toggleFullScreen}
+                          />
+                        </View>
+                      )
+                    }
 
-            <VideoPlayer
-              allowsExternalPlayback
-              controls
-              source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
-              ref={videoPlayerRef}
-              onError={onError}
-              onBuffer={onBuffer}
-              onLoad={onLoad}
-              fullscreen={true}
-              onProgress={onProgress}
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-            />
+                    <VideoPlayer
+                      allowsExternalPlayback
+                      controls
+                      source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+                      ref={videoPlayerRef}
+                      onError={onError}
+                      onBuffer={onBuffer}
+                      onLoad={onLoad}
+                      fullscreen={true}
+                      onProgress={onProgress}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    />
+                  </>
+                )
+            }
           </View>
       </View>
       
       {
         !isFullScreen && (
-          <View style={styles.videoDetailsContainer}>
-          </View>  
+          <View style={[styles.videoDetailsContainer, { backgroundColor: 'blue' }]}>
+            <Text>
+              fasdfasdf
+            </Text>
+          </View>
         )
       }
     </View>

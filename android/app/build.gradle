@@ -187,7 +187,7 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation "com.google.android.gms:play-services-cast-framework:${rootProject.ext.castFrameworkVersion}"
-    implementation 'com.android.support:appcompat-v7:+'
+    // implementation project(':react-native-google-cast')
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

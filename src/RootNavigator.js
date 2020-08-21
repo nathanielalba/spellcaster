@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 // Screens
 import VideoListScreen from './screens/VideoListScreen';
 import VideoPlayerScreen from './screens/VideoPlayerScreen';
+
+import { CastingButton } from './components/casting';
 import theme from './theme';
 
 
@@ -17,6 +19,9 @@ const RootNavigator = () => {
         screenOptions={{
           headerStyle: theme.navigation.headerStyle,
           headerTitleStyle: theme.navigation.headerTitleStyle,
+          headerRight: () => (
+            <CastingButton />
+          ),
         }}
       >
         <Stack.Screen
