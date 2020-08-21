@@ -14,6 +14,12 @@ import videoData from '../videoData.json';
 
 const VideoListScreen = () => {
   const videos = useSelector(({ videos }) => videos);
+  // first check to see if the store has been loaded with movie dad
+  useEffect(() => {
+    if (!videos.loaded) {
+      updateVideoData();
+    }
+  }, [videos]);
   const updateVideoData = useAction((state) => {
     return {
       ...state,
@@ -23,17 +29,12 @@ const VideoListScreen = () => {
       },
     };
   });
-  // first check to see if the store has been loaded with movie dad
-  useEffect(() => {
-    if (!videos.loaded) {
-      updateVideoData();
-    }
-  }, [videos]);
 
   const renderItem = ({ item }) => {
     return (
       <VideoListItem
-        thumbnail={item.thumbnail}
+        id={item.id}
+        imageUrl={item.imageUrl}
         title={item.title}
       />
     );

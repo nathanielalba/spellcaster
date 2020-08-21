@@ -11,8 +11,16 @@ const initialState = {
     loaded: false,
   },
   // need to determine where to start/progress
+  // ie: { data: { 1: { duration: 32.4 } } }
   videoPlayback: {
     data: {},
+  },
+  videoPlayer: {
+    isFullScreen: false,
+  },
+  casting: {
+    isCasting: false,
+    device: null,
   },
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   View,
   Image,
@@ -8,22 +8,27 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'redux-zero/react';
 
 import theme from '../../theme';
 
 export const VideoListItem = (props) => {
-  const { thumbnail, title } = props;
+  const { id, imageUrl, title } = props;
   const navigation = useNavigation();
+  const playbackData = useSelector(({ videoPlayback }) => videoPlayback[id]);
+  const showProgressBar = useMemo(() =>
+    Boolean(playbackData && playbackData.currentTime && playbackData.duration)
+  ,[playbackData]);
 
   const onPress = () => {
-    navigation.navigate('VideoPlayer');
+    navigation.navigate('VideoPlayer', { videoId: id });
   };
 
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Image
-          source={{ uri: thumbnail }}
+          source={{ uri: imageUrl }}
           style={styles.thumbnail}
         />
 
@@ -32,13 +37,26 @@ export const VideoListItem = (props) => {
             {title}
           </Text>
         </View>
+
+        {
+          showProgressBar && (
+            <View style={styles.progressBarContainer}>
+              <View style={{ flex: playbackData.currentTime, backgroundColor: theme.colors.primary }} />
+              <View style={{ flex: (playbackData.duration - playbackData.currentTime), backgroundColor: theme.colors.gray }} />
+            </View>  
+          )
+        }
       </View>
     </TouchableOpacity>
   );
 };
 
 VideoListItem.propTypes = {
-  thumbnail: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+  imageUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
@@ -63,6 +81,11 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 14,
+  },
+  progressBarContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    height: 5,
   },
 });
 
