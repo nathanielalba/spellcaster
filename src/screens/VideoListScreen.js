@@ -43,13 +43,14 @@ const VideoListScreen = () => {
   };
 
   return (
-    <FlatList
-      keyExtractor={item => `${item.id}`}
-      renderItem={renderItem}
-      data={tempData}
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.container}
-    />
+    <View style={styles.container}>
+      <FlatList
+        keyExtractor={item => `${item.id}`}
+        renderItem={renderItem}
+        data={tempData}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 };
 

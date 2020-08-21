@@ -30,11 +30,6 @@ const RootNavigator = () => {
         <Stack.Screen
           name={'VideoPlayer'}
           component={VideoPlayerScreen}
-          options={{
-            headerTitleStyle: {
-              color: 'red',
-            }
-          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
