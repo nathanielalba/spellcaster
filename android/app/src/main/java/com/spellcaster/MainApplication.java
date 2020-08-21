@@ -10,7 +10,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-// import com.reactnative.googlecast.GoogleCastPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -27,8 +26,6 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-          // add this here as the current library hasn't released v4 which has support for androidx & autolinking
-          // packages.add(new GoogleCastPackage());
           return packages;
         }
 
