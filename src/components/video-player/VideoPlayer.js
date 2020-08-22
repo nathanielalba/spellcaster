@@ -12,6 +12,7 @@ import GoogleCast from 'react-native-google-cast';
 
 import VideoPlayerControls from './VideoPlayerControls';
 import { CurrentlyCastingText } from '../casting';
+import { logger } from '../../utils';
 import theme from '../../theme';
 
 const VideoPlayer = (props) => {
@@ -91,7 +92,7 @@ const VideoPlayer = (props) => {
   };
 
   const onError = (args) => {
-    console.log('error', args);
+    logger('error', args);
   };
 
   // UI based functions for controls
@@ -120,8 +121,6 @@ const VideoPlayer = (props) => {
       controlsRef.current = setTimeout(() => setIsShowingControls(false), 5000);  
     }
   };
-
-  console.log('casting', casting);
 
   return (
     <View style={styles.container}>

@@ -7,7 +7,7 @@ const useCasting = () => {
   const [device, setDevice] = useState(null);
   const [isCasting, setIsCasting] = useState(false);
   // RNGC Constants
-  const SESSION_STARTED = GoogleCast['SESSION_STARTED'];
+  const SESSION_STARTED = GoogleCast.SESSION_STARTED;
   const SESSION_ENDED = GoogleCast.SESSION_ENDING;
 
   useEffect(() => {
