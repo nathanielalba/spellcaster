@@ -11,8 +11,35 @@ import { CastingButton } from './components/casting';
 import { useCasting } from './hooks';
 import theme from './theme';
 
-
 const Stack = createStackNavigator();
+
+// generic transition config for react navigation
+const transitionConfig = {
+  damping: 750,
+  stiffness: 1000,
+  overshootClamping: true,
+};
+
+// flips card along Y axis during scene navigation
+const flipY = ({ index, current }) => {
+  return {
+    cardStyle: {
+      transform: [
+        {
+          rotateY: current.progress.interpolate({
+            inputRange: [index - 1, index],
+            outputRange: ['180deg', '0deg'],
+            extrapolate: 'clamp',
+          }),
+        },
+      ],
+      opacity: current.progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+      }),
+    }
+  }
+}
 
 const RootNavigator = () => {
   const updateCasting = useAction((state, args) => ({ ...state, casting: { ...args } }));
@@ -30,6 +57,11 @@ const RootNavigator = () => {
           headerRight: () => (
             <CastingButton />
           ),
+          transitionSpec: {
+            open: transitionConfig,
+            close: transitionConfig,
+          },
+          cardStyleInterpolator: flipY,
         }}
       >
         <Stack.Screen
