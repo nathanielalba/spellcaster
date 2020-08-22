@@ -38,5 +38,9 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "author": {
+    "name": "Nate Alba",
+    "email": "me@natealba.com"
   }
 }

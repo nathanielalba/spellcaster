@@ -15,6 +15,7 @@ A React Native app that allows you to cast spells to your ChromeCast!
 - Click the play button to run!
 
 ### Project layout
+```
 ┣ src
  ┃ ┣ /components
  ┃ ┣ /casting
@@ -29,6 +30,7 @@ A React Native app that allows you to cast spells to your ChromeCast!
  ┣ store.js
  ┣ theme.js
  ┗ videoData.json
+```
 
 ### How it works
 The app essentially revolves 1 part. If there is a connected chromecast device, show optional parts when actually watching the video.
@@ -40,3 +42,9 @@ The app essentially revolves 1 part. If there is a connected chromecast device, 
 ### Todo/@dev
 - Stay up to date with react-native-google-cast to make sure that when v4 comes out, the project isn't using a 'hacked' implementation. The current setup is not a really solid way of handling it I feel and seems a little brittle.
 - react-native-video falls in somewhat of the same boat. Having to pull master to get some of the latest features merged in (there were issues with the playbutton disappearing and fullscreen mode).
+
+
+#### Links
+- [react-native-video](https://github.com/react-native-community/react-native-video)
+- [react-native-google-cast](https://github.com/react-native-google-cast/react-native-google-cast)
+- [redux-zero]([https://](https://github.com/redux-zero/redux-zero))
