@@ -42,6 +42,7 @@ const flipY = ({ index, current }) => {
 }
 
 const RootNavigator = () => {
+  // have this hook here so the chromecast can always be listening to events
   const updateCasting = useAction((state, args) => ({ ...state, casting: { ...args } }));
   const [isCasting, device] = useCasting();
   useEffect(() => {
