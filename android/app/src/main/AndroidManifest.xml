@@ -23,6 +23,8 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      <!-- RN Google Cast Expanded Media Controls -->
+      <activity android:name="com.reactnative.googlecast.GoogleCastExpandedControlsActivity" />
 
       <!-- RN Google Cast Metadata -->
       <meta-data

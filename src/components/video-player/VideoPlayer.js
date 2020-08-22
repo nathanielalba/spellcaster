@@ -74,6 +74,8 @@ const VideoPlayer = (props) => {
           ? videoPlayback.currentTime
           : 0,
       });
+
+      GoogleCast.launchExpandedControls();
     } else {
       GoogleCast.endSession();
     }
@@ -118,6 +120,8 @@ const VideoPlayer = (props) => {
       controlsRef.current = setTimeout(() => setIsShowingControls(false), 5000);  
     }
   };
+
+  console.log('casting', casting);
 
   return (
     <View style={styles.container}>

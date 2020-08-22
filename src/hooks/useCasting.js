@@ -8,7 +8,7 @@ const useCasting = () => {
   const [isCasting, setIsCasting] = useState(false);
   // RNGC Constants
   const SESSION_STARTED = GoogleCast['SESSION_STARTED'];
-  const SESSION_ENDED = GoogleCast['SESSION_ENDED'];
+  const SESSION_ENDED = GoogleCast.SESSION_ENDING;
 
   useEffect(() => {
     GoogleCast.EventEmitter.addListener(SESSION_STARTED, () => {

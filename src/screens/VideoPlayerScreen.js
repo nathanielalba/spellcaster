@@ -4,10 +4,6 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useSelector } from 'redux-zero/react';
 
 import { VideoPlayer, VideoPlayerDescription } from '../components/video-player';
-import { IconButton } from '../components/common';
-import { useCasting } from '../hooks';
-import { isPortrait } from '../utils';
-import theme from '../theme';
 
 const VideoPlayerScreen = () => {
   const videoPlayer = useSelector(({ videoPlayer }) => videoPlayer);

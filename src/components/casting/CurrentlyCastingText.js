@@ -7,13 +7,13 @@ import theme from '../../theme';
 const CurrentlyCastingText = () => {
   const castingDevice = useSelector(({ casting }) => casting.device);
 
-  return (
+  return castingDevice && (
     <View style={styles.container}>
       <Text style={styles.text}>
         Currently casting to: {castingDevice.name}
       </Text>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 20,
   },
   text: {
     color: theme.colors.white,
